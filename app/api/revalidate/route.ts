@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import { revalidateTag } from 'next/cache';
 import { parseBody } from 'next-sanity/webhook';
 
@@ -12,7 +12,7 @@ import { parseBody } from 'next-sanity/webhook';
  *   Trigger on: create, update, delete
  *   Secret: mesma string de SANITY_REVALIDATE_SECRET
  */
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const { body, isValidSignature } = await parseBody<{ _type?: string }>(
       req,
